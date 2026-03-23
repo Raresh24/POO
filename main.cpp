@@ -40,17 +40,17 @@ class Student {
     int id;
     string nume, grupa;
 public:
-    // constructor
+    
     Student(int id = 0, string n = "", string g = "") : id(id), nume(n), grupa(g) {}
 
-    // constructor de copiere
+   
     Student(const Student& s) {
         id = s.id;
         nume = s.nume;
         grupa = s.grupa;
     }
 
-    // operator =
+   
     Student& operator=(const Student& s) {
         if (this != &s) {
             id = s.id;
@@ -60,15 +60,16 @@ public:
         return *this;
     }
 
-    // destructor
+   
     ~Student() {}
 
-    // getteri
+   
     int getId() const { return id; }
     string getNume() const { return nume; }
     string getGrupa() const { return grupa; }
 
-    // afisare obiect
+
+
     friend ostream& operator<<(ostream& out, const Student& s) {
         return out << "ID:" << s.id << " Nume:" << s.nume << " Grupa:" << s.grupa;
     }
@@ -157,21 +158,24 @@ class Catalog {
     vector<Disciplina> d;
     vector<Nota> n;
 
-    // cautare student dupa id
+
+
     int findS(int id) const {
         for (int i = 0; i < st.size(); i++)
             if (st[i].getId() == id) return i;
         return -1;
     }
 
-    // cautare disciplina dupa cod
+
+   
     int findD(int cod) const {
         for (int i = 0; i < d.size(); i++)
             if (d[i].getCod() == cod) return i;
         return -1;
     }
 
-    // cautare nota existenta
+
+
     int findN(int id, int cod) const {
         for (int i = 0; i < n.size(); i++)
             if (n[i].getIdS() == id && n[i].getCodD() == cod)
@@ -180,7 +184,7 @@ class Catalog {
     }
 
 public:
-    // incarcare date din fisiere
+  
     void load() {
         st.clear();
         d.clear();
@@ -192,32 +196,32 @@ public:
         float v;
         string nume, gr, den;
 
-        // citire studenti
+        
         while (f1 >> id >> nume >> gr)
             st.push_back(Student(id, nume, gr));
 
-        // citire discipline
+       
         while (f2 >> cod >> den >> cr)
             d.push_back(Disciplina(cod, den, cr));
 
-        // citire note cu validare
+       
         while (f3 >> sid >> cd >> v)
             addNota(Nota(sid, cd, v));
     }
 
-    // adaugare student
+  
     void addStudent(const Student& x) {
         if (findS(x.getId()) == -1)
             st.push_back(x);
     }
 
-    // adaugare disciplina
+   
     void addDisciplina(const Disciplina& x) {
         if (findD(x.getCod()) == -1)
             d.push_back(x);
     }
 
-    // adaugare sau actualizare nota
+
     void addNota(const Nota& x) {
         if (findS(x.getIdS()) == -1 || findD(x.getCodD()) == -1)
             return;
@@ -232,28 +236,28 @@ public:
             n.push_back(x);
     }
 
-    // afisare studenti
+   
     void showStudents() const {
         cout << "\n--- STUDENTI ---\n";
         for (int i = 0; i < st.size(); i++)
             cout << st[i] << '\n';
     }
 
-    // afisare discipline
+  
     void showDiscipline() const {
         cout << "\n--- DISCIPLINE ---\n";
         for (int i = 0; i < d.size(); i++)
             cout << d[i] << '\n';
     }
 
-    // afisare note
+  
     void showNote() const {
         cout << "\n--- NOTE ---\n";
         for (int i = 0; i < n.size(); i++)
             cout << n[i] << '\n';
     }
 
-    // situatie scolara a unui student
+    
     void situatie(int id) const {
         int p = findS(id);
 
@@ -284,7 +288,7 @@ public:
         cout << "Media ponderata: " << mediaPonderata(id) << '\n';
     }
 
-    // calcul medie simpla
+    
     float media(int id) const {
         float s = 0;
         int k = 0;
@@ -299,7 +303,7 @@ public:
         return s / k;
     }
 
-    // calcul medie ponderata
+   
     float mediaPonderata(int id) const {
         float suma = 0;
         int cred = 0;
@@ -318,7 +322,7 @@ public:
         return suma / cred;
     }
 
-    // vf daca studentul are restante
+    
     bool rest(int id) const {
         for (int i = 0; i < n.size(); i++)
             if (n[i].getIdS() == id && n[i].getVal() < 5)
@@ -326,7 +330,7 @@ public:
         return false;
     }
 
-    // afisare integralisti
+  
     void integralisti() const {
         cout << "\n--- INTEGRALISTI ---\n";
 
@@ -335,7 +339,7 @@ public:
                 cout << st[i] << " | Medie: " << mediaPonderata(st[i].getId()) << '\n';
     }
 
-    // afisare restantieri
+
     void restantieri() const {
         cout << "\n--- RESTANTIERI ---\n";
 
@@ -344,7 +348,7 @@ public:
                 cout << st[i] << '\n';
     }
 
-    // determinare sef de promotie
+  
     void sefPromotie() const {
         int best = -1;
         float mBest = -1;
@@ -369,10 +373,10 @@ public:
 int main() {
     Catalog c;
 
-    // incarcare date
+    
     c.load();
 
-    // apeluri principale
+ 
     c.showStudents();
     c.showDiscipline();
     c.showNote();
@@ -381,7 +385,7 @@ int main() {
     c.restantieri();
     c.sefPromotie();
 
-    // exemple de adaugare
+   
     c.addStudent(Student(6, "Mara", "132"));
     c.addDisciplina(Disciplina(105, "POO2", 5));
     c.addNota(Nota(6, 105, 10));
