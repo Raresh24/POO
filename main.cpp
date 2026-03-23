@@ -78,17 +78,17 @@ class Disciplina {
     int cod, credite;
     string den;
 public:
-    // constructor
+
     Disciplina(int c = 0, string d = "", int cr = 0) : cod(c), credite(cr), den(d) {}
 
-    // constructor de copiere
+
     Disciplina(const Disciplina& x) {
         cod = x.cod;
         den = x.den;
         credite = x.credite;
     }
 
-    // operator =
+
     Disciplina& operator=(const Disciplina& x) {
         if (this != &x) {
             cod = x.cod;
@@ -98,14 +98,14 @@ public:
         return *this;
     }
 
-    // destructor
+
     ~Disciplina() {}
 
     int getCod() const { return cod; }
     int getCredite() const { return credite; }
     string getDen() const { return den; }
 
-    // afisare obiect
+
     friend ostream& operator<<(ostream& out, const Disciplina& d) {
         return out << "Cod:" << d.cod << " Disciplina:" << d.den << " Credite:" << d.credite;
     }
@@ -115,17 +115,17 @@ class Nota {
     int idS, codD;
     float val;
 public:
-    // constructor
+
     Nota(int s = 0, int d = 0, float v = 0) : idS(s), codD(d), val(v) {}
 
-    // constructor de copiere
+
     Nota(const Nota& x) {
         idS = x.idS;
         codD = x.codD;
         val = x.val;
     }
 
-    // operator =
+
     Nota& operator=(const Nota& x) {
         if (this != &x) {
             idS = x.idS;
@@ -135,7 +135,7 @@ public:
         return *this;
     }
 
-    // destructor
+
     ~Nota() {}
 
     int getIdS() const { return idS; }
@@ -145,7 +145,6 @@ public:
     // setter folosit la actualizarea notei
     void setVal(float v) { val = v; }
 
-    // afisare obiect
     friend ostream& operator<<(ostream& out, const Nota& n) {
         return out << "StudentID:" << n.idS
                    << " DisciplinaCod:" << n.codD
@@ -319,7 +318,7 @@ public:
         return suma / cred;
     }
 
-    // verifica daca studentul are restante
+    // vf daca studentul are restante
     bool rest(int id) const {
         for (int i = 0; i < n.size(); i++)
             if (n[i].getIdS() == id && n[i].getVal() < 5)
